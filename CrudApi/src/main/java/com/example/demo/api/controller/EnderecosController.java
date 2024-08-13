@@ -1,6 +1,6 @@
 package com.example.demo.api.controller;
 
-import com.example.demo.api.model.Enderecos;
+import com.example.demo.api.model.User;
 import com.example.demo.service.EnderecosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class EnderecosController {
     }
 
     @PostMapping("/create")
-    public Enderecos createEndereco(@RequestBody Enderecos enderecos) {
+    public User.Enderecos createEndereco(@RequestBody User.Enderecos enderecos) {
         return enderecoService.saveEndereco(enderecos);
     }
 
     @GetMapping("/{id}")
-    public Enderecos findEndereco(@PathVariable int id) {
+    public User.Enderecos findEndereco(@PathVariable int id) {
         return enderecoService.getEnderecoById(id);
     }
 
@@ -31,7 +31,7 @@ public class EnderecosController {
     }
 
     @PutMapping("/update/{id}")
-    public Enderecos updateEndereco(@PathVariable int id, @RequestBody Enderecos enderecos) {
+    public User.Enderecos updateEndereco(@PathVariable int id, @RequestBody User.Enderecos enderecos) {
         return enderecoService.updateEnderecoById(id, enderecos);
     }
 }

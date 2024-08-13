@@ -1,6 +1,6 @@
 package com.example.demo.api.controller;
 
-import com.example.demo.api.model.Telefones;
+import com.example.demo.api.model.User;
 import com.example.demo.service.TelefoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ public class TelefoneController {
     }
 
     @PostMapping("/create")
-    public Telefones createTelefone(@RequestBody Telefones telefone) {
+    public User.Telefones createTelefone(@RequestBody User.Telefones telefone) {
         return telefoneService.saveTelefone(telefone);
     }
 
     @GetMapping("/{id}")
-    public Telefones findTelefone(@PathVariable int id) {
+    public User.Telefones findTelefone(@PathVariable int id) {
         return telefoneService.getTelefoneById(id);
     }
 
@@ -31,7 +31,7 @@ public class TelefoneController {
     }
 
     @PutMapping("/update/{id}")
-    public Telefones updateTelefoneById(@PathVariable int id, @RequestBody Telefones telefone) {
+    public User.Telefones updateTelefoneById(@PathVariable int id, @RequestBody User.Telefones telefone) {
         return telefoneService.updateTelefoneById(id, telefone);
     }
 }

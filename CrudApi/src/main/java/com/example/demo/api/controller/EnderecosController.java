@@ -24,4 +24,14 @@ public class EnderecosController {
     public Enderecos findEndereco(@PathVariable int id) {
         return enderecoService.getEnderecoById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEndereco(@PathVariable int id) {
+        enderecoService.deleteEnderecoById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public Enderecos updateEndereco(@PathVariable int id, @RequestBody Enderecos enderecos) {
+        return enderecoService.updateEnderecoById(id, enderecos);
+    }
 }

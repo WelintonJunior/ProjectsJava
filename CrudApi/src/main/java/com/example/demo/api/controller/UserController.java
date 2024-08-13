@@ -25,4 +25,14 @@ public class UserController {
     public User getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable int id) {
+        userService.deleteUserById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public User updateUserBydId(@PathVariable int id, @RequestBody User user) {
+        return userService.updateUserBydId(id, user);
+    }
 }

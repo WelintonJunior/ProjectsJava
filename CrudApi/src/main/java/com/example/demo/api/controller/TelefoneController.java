@@ -25,4 +25,13 @@ public class TelefoneController {
     public Telefones findTelefone(@PathVariable int id) {
         return telefoneService.getTelefoneById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTelefoneById(@PathVariable int id) { telefoneService.deleteTelefoneById(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public Telefones updateTelefoneById(@PathVariable int id, @RequestBody Telefones telefone) {
+        return telefoneService.updateTelefoneById(id, telefone);
+    }
 }

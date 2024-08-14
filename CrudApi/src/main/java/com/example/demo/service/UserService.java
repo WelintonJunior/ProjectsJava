@@ -5,6 +5,7 @@ import com.example.demo.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,9 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
+    public List<User> getAllUsers() {return userRepository.findAll();}
 
     public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
@@ -36,6 +35,8 @@ public class UserService {
             User updatedUser = existingUser.get();
             updatedUser.setNome(user.getNome());
             updatedUser.setIdade(user.getIdade());
+            updatedUser.setPassword(user.getPassword());
+            updatedUser.setRole(user.getRole());
             return userRepository.save(updatedUser);
         } else {
             return null;

@@ -6,7 +6,6 @@ import lombok.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.authority.mapping.SimpleAttributes2GrantedAuthoritiesMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -19,6 +18,7 @@ import java.util.List;
 @Table(name = "usuarios")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
     private int idade;
@@ -33,7 +33,8 @@ public class User implements UserDetails {
     @JsonManagedReference
     private List<Enderecos> enderecos;
 
-    public User(String nome, String password, UserRole role) {
+    public User(int id, String nome, String password, UserRole role) {
+        this.id = id;
         this.nome = nome;
         this.password = password;
         this.role = role;
@@ -41,8 +42,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override
@@ -76,6 +80,7 @@ public class User implements UserDetails {
     @Table(name = "telefones")
     public static class Telefones {
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
         @ManyToOne
@@ -84,7 +89,6 @@ public class User implements UserDetails {
         private User user;
 
         private String numero_telefone;
-
     }
 
     @Getter
@@ -93,6 +97,7 @@ public class User implements UserDetails {
     @Table(name = "enderecos")
     public static class Enderecos {
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
         @ManyToOne
